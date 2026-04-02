@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: red;
+    }
+</style>
+
+<script type="application/javascript">
+
+let name = "";
+let pets = 0;
+let option = '';
+
+document.write("Welcome to my Week 5 Assignment. Today, let's discuss pets!");
+document.write("<br>");
+option = prompt("Do you have any pets? (y/n) ");
+
+if (option == 'y'){
+pets = prompt ("That's Awesome. So do I! How many pets do you have? ");
+    switch (pets){
+        case '1': 
+            document.write("I have more than one pet, but I have one turtle! Her name is Corona (Coco for short).");
+            break;
+        case '2': 
+            document.write("I have more than two pets, but my two favorite are my mom's dog and cat! Their names are Lili (dog) and Cinder (cat).");
+            break;
+        case '3':
+            document.write("I have more than three pets, but I have 3 cats! Their names are Minnie, Cinder, and Matteo.");
+            break;
+        case '4':
+            document.write("I have more than four pets, but I have 3 dogs plus an honorary dog! The dogs are Lili, Alonzo, Gator, and the dog we babysit frequently, Artemis.");
+            break;
+        case '7':
+            document.write("Wow! We have the same amount of pets! I have 7 pets total!");
+            document.write ("<br>");
+            document.write("I have 3 cats, 3 dogs, and a turtle! There names are Minnie, Cinder, Matteo, Lili, Alonzo, Gator, and Corona (Coco for short).");
+            break;
+        default: 
+            document.write("Woah okay, you have so many! I have 7 pets, but my absolute favorite is my Dog Lili and my cat Cinder!");
+            break;
+    }
+    document.write("<br>");
+    name = prompt("What is your favorite pet's name? ");
+
+    document.write("<br>");
+    if ((name == "Basil") || (name == "basil")){
+        document.write("No way we have the same favorite name! I'm gonna name my next pet Basil! You have great taste.");
+    }
+    else {
+    document.write (name + " huh? That's a great name! When I get a pet for myself, I think I'm gonna name it Basil.");
+    }
+}
+else if (option == 'n'){
+    document.write ("Well that's okay! Pets aren't for everyone and not everyone can afford them.");
+    document.write("<br>");
+    name = prompt("If you did have one, what would you name it? ");
+
+    document.write("<br>");
+    if ((name == "Basil") || (name == "basil")){
+        document.write("No way we have the same favorite name! I'm gonna name my next pet Basil! You have great taste.");
+    }
+    else {
+    document.write (name + " huh? That's a great name! When I get a pet for myself, I think I'm gonna name it Basil.");
+    }
+}
+
+document.write ("<br>");
+document.write("Thanks for sharing about your pets with me! I hope you have a great day!");
+</script>
+</body>
+</html>
