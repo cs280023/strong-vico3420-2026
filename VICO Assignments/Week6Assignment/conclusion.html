@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Create an HTML page with CSS styling and JavaScript code to do the following:
+
+Create an array of some kind of list with at least five elements in any order. (10 XP)
+ 
+Display this list somewhere on the page (10 XP), sorted alphabetically (10 XP), using one of the four loop types taught in class (10 XP).
+ 
+Create an array of images of your choice. (This would be an array of the paths to the images, either in your project or URLs of images online.) (10 XP)
+ 
+Display these images (10 XP) with a size 200 px wide or less, using one of the four loop types taught in class (10 XP).
+ 
+Create a multidimensional array of links for a website that includes the text and the URL/path for each element (20 XP).
+ 
+Display this a "menu" on your page (20 XP) using one of the four loop types taught in class (10 XP).
+ 
+(Bonus 10 XP) Make the thumbnails in your thumbnail gallery open to its corresponding larger image.
+ 
+For the rest of the points:
+
+Include some CSS styling (5 XP)
+ 
+Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)
+ 
+* Do not use a looping method that was not covered in class. If you do, you will not get points for the loop.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+</head>
+<body>
+    <style></style>
+
+    <script type="application/javascript">
+        
+        let navArray = [
+            [ "Caleb's Spicy Chicken", "index.html"],
+            [ "Recipes", "recipes.html"],
+            [ "Conclusion", "conclusion.html"]
+        ]
+
+        for (let x of navArray) {
+            document.write("<a href='" + x[1] + "'>" + x[0] + "</a><br>");
+        }
+
+    </script>
+
+</body>
+
+</html>
