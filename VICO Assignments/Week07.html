@@ -10,26 +10,29 @@
     <style>
     </style>
     
-    <div class="HeroNameText">
-        <label for="HeroName">What's your Superhero Name? </label>
-        <input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">
+    <div id="HeroNameText">
+        <label for="HeroName"><h4>What's your Superhero Name? </h4></label>
+    </div><br>
+
+    <div id="powersCheck">
+        <label><h4>Pick up to 3 Super Powers: </h4></label>
+    </div><br>
+
+    <div id="colorForm">
+	    <label><h4>Favorite Color: </h4></label>
+	</div><br>
+ 
+    <div id="idealDropDown">
+        <label for="Ideals"><h4>Choose your Hero Ideal: </h4></label>
+        <select id="Ideals" name="Ideals" onclick = "SubmitInfo()"></select>
+    </div><br>
+
+    <button type="submit" value="submit" id="submitButton" onclick = "SubmitInfo()">Submit</button><br>
+
+    <div id = "result">
+        <label><h4>Here are your Superhero Quiz Results: </h4></label>    
     </div>
 
-    <br>
-
-    <div id="powersCheck"></div><br>
-
-    <div class="formField">
-	            <label>Font type: </label><br>
-	            <input type="radio" id="serif" name="fontType" value="serif" checked onclick="updateResults()" onkeyup="updateResults()"> 
-	            <label for="serif">Serif</label><br>
-	            <input type="radio" id="sans" name="fontType" value="sans" onclick="updateResults()"> 
-	            <label for="sans">Sans Serif</label><br>
-	            <input type="radio" id="script" name="fontType" value="script" onclick="updateResults()"> 
-	            <label for="script">Script</label>
-	        </div>
- 
-            <button type="submit" value="submit" id="submitButton">Submit</button><br>
     <script type="application/javascript">
   /* Create an HTML page with CSS styling and JavaScript code to do the following:
 
@@ -49,44 +52,82 @@ Include some CSS styling (5 XP)
  
 Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)*/
  
-        document.write("Welcome to Week 7! Today, I'll make it about Superheroes! I'm running out of ideas!")
 
         //gonna make a superhero quiz!
-        let powers = document.getElementById("powersCheck"); //Checkboxes
-        let powerList = [
-            "Flight", "Super Strength", "Invisibility", "Telepathy", "Super Speed", "Telekinesis", 
-            "Shape Shifting", "Time Manipulation", "Energy Projection", "Healing Factor", "Super Intelligence", 
-            "Elemental Control", "Size Manipulation", "Force Fields", "Laser Vision", "Immortality"
-            ];
 
+        //HERO NAME SECTION
+        let SuperName = document.getElementById("HeroNameText"); //textform
+        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" onclick = "SubmitInfo()" placeholder = "Superhero Name Here...">`;
+
+        //POWERS SECTION
+        let powers = document.getElementById("powersCheck"); //Checkboxes
+        let powerList = [ "Flight", "Super Strength", "Invisibility", "Telepathy", "Super Speed", "Telekinesis", 
+            "Shape Shifting", "Time Manipulation", "Energy Projection", "Healing Factor", "Super Intelligence", 
+            "Elemental Control", "Size Manipulation", "Force Fields", "Laser Vision", "Immortality" ];
         for (let y in powerList){
             powers.innerHTML += 
                 `<label for="powerList">${powerList[y]}</label>
-                <input type = "checkbox" id = "powerList" name = "power[${y}]" value = "${powerList[y]}">
+                <input type = "checkbox" id = "powerList" name = "power[${y}]" value = "${powerList[y]}" onclick = "SubmitInfo()">
                 <br>`;
                 CheckBoxLimits();
         }
 
-       //Trying to concatenate the powers into a string by checking if each box is checked, and adding the checked boxes into a string that's stored in a variable.
-       //instead, gonna make a function where all data is stored in diff variables upon submitting.
+        //COLORS SECTION
+        let colorform = document.getElementById("colorForm"); //Radio Buttons
+        let colors = ["Red", "Orange", "Yellow", "Blue", "Green", "Purple", "Pink", "Black", "White"];
+        for (let x in colors){
+            colorform.innerHTML += 
+                `<input type="radio" id="${colors[x]}" name="color" value="${colors[x]} onclick = "SubmitInfo()">
+                <label for="${colors[x]}">${colors[x]}</label><br>`;
+        }
+
+        //IDEALS SECTION
+        let ideals = document.getElementById('idealDropDown').getElementsByTagName("select")[0]; //Dropdown Menu
+        let idealList = ["Justice", "Freedom", "Power", "Knowledge", "Peace", "Love", "Revenge", "Family", "Rage", "Money"];
+        for (let z in idealList){
+            ideals.innerHTML += 
+                `<option value="${idealList[z]}">${idealList[z]}</option>`;
+        }//fix why its opening upward with css 
+        
+       /*Trying to concatenate the powers into a string by checking if each box is checked, 
+       and adding the checked boxes into a string that's stored in a variable.
+       instead, gonna make a function where all data is stored in diff variables upon submitting. */
 
         function SubmitInfo() {
             let submitButton = document.getElementById("submitButton");
             let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input");
-            //will add more
-            submitButton.onclick = function() {
-                
-                for (let i = 0; i <powerlist.length; i++){
+            let colorchoice = document.getElementById('colorform').getElementsByTagName("input");
+            
+            //have to make a function specifically for checkboxes
+            //Might need to put this in an area or an object?
+            const POWERLI = CheckBoxResults();
+            const COLORCHOICE = urlParams.get('color');
+            const IDEALCHOICE = urlParams.get('Ideals');
+            const HERONAME = urlParams.get('HeroName');
+
+            submitButton.onclick = function(){
+                let results = document.getElementById("result");
+                results.innerHTML += `<p>Here are your Powers: ${POWERLI}</p>`;
+                results.innerHTML += `<p>Hero Name: ${HERONAME}</p>`;
+                results.innerHTML += `<p>Color Choice: ${COLORCHOICE}</p>`;
+                results.innerHTML += `<p>Ideal Choice: ${IDEALCHOICE}</p>`;
+            }
+
+            return results;
+       } 
+
+       //next function here for checkboxes
+       function CheckBoxResults(finPowers) {
+        for (let i = 0; i <powerlist.length; i++){
                     let finPowers = [];
                     if (checkboxgroup[i].checked == true){
-                        finPowers.push(checkboxgroup[i].value); //learned this from c++ this is my code
+                        finPowers.push(urlParams.get('power[' + i + ']')); //learned this from c++ this is my code
                     } 
                 } 
-            }
-       }
 
-       //might need to make a function with this code
-       const fName = urlParams.get('canText');
+        return finPowers;
+       }
+       const CHECKBOXES = urlParams.get('canText');
        //I might make a function that uses a loop to add lines and check them all. Then itll store only the checked oned in an array.
 
         //This is not my code, it's modified, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
@@ -105,20 +146,15 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
                     }
                 }
             }
-        }
-    
-        let SuperName = document.forms["contactForm"].HeroName.value; 
-        let colors; //Radio Buttons
+        } 
 
-        let ideals; //Dropdown Menu
-
-        let existingHeroes = [
+        let existingHeroes = [ 
         "Superman", "Batman", "The Flash", "Wonder Woman", "Green Lantern", 
         "Aquaman", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Spider-Man",
         "Scarlet Witch", "Wolverine", "Ant Man", "Doctor Strange", "Mystique", "Deadpool", 
         ];
 
-        function whatIsYourSuperHero() { //cascading if else statements to determine
+        function whatIsYourSuperHero() { //cascading if else statements to determine within a function
             document.write("Your Superhero Name is: " + SuperName + "!<br>");
         }
 
