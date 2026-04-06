@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7</title>
+</head>
+<body>
+   
+    <style>
+    </style>
+    
+    <div class="HeroNameText">
+        <label for="HeroName">What's your Superhero Name? </label>
+        <input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">
+    </div>
+
+    <br>
+
+    <div id="powersCheck"></div><br>
+
+    <div class="formField">
+	            <label>Font type: </label><br>
+	            <input type="radio" id="serif" name="fontType" value="serif" checked onclick="updateResults()" onkeyup="updateResults()"> 
+	            <label for="serif">Serif</label><br>
+	            <input type="radio" id="sans" name="fontType" value="sans" onclick="updateResults()"> 
+	            <label for="sans">Sans Serif</label><br>
+	            <input type="radio" id="script" name="fontType" value="script" onclick="updateResults()"> 
+	            <label for="script">Script</label>
+	        </div>
+ 
+            <button type="submit" value="submit" id="submitButton">Submit</button><br>
+    <script type="application/javascript">
+  /* Create an HTML page with CSS styling and JavaScript code to do the following:
+
+Create a custom function with no parameters (10 XP) and call it at least once (10 XP).
+ 
+Create a custom function with one parameter (15 XP) and call it at least once (15 XP).
+ 
+Create a custom function with at least two parameters (20 XP) and call it at least once (20 XP). 
+ 
+Have at least one of the custom functions return information. (5 XP)
+ 
+(Bonus 5 XP) Have a function run on an interaction with a click, scroll, hover, etc.
+ 
+For the rest of the points:
+
+Include some CSS styling (5 XP)
+ 
+Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)*/
+ 
+        document.write("Welcome to Week 7! Today, I'll make it about Superheroes! I'm running out of ideas!")
+
+        //gonna make a superhero quiz!
+        let powers = document.getElementById("powersCheck"); //Checkboxes
+        let powerList = [
+            "Flight", "Super Strength", "Invisibility", "Telepathy", "Super Speed", "Telekinesis", 
+            "Shape Shifting", "Time Manipulation", "Energy Projection", "Healing Factor", "Super Intelligence", 
+            "Elemental Control", "Size Manipulation", "Force Fields", "Laser Vision", "Immortality"
+            ];
+
+        for (let y in powerList){
+            powers.innerHTML += 
+                `<label for="powerList">${powerList[y]}</label>
+                <input type = "checkbox" id = "powerList" name = "power[${y}]" value = "${powerList[y]}">
+                <br>`;
+                CheckBoxLimits();
+        }
+
+       //Trying to concatenate the powers into a string by checking if each box is checked, and adding the checked boxes into a string that's stored in a variable.
+       //instead, gonna make a function where all data is stored in diff variables upon submitting.
+
+        function SubmitInfo() {
+            let submitButton = document.getElementById("submitButton");
+            let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input");
+            //will add more
+            submitButton.onclick = function() {
+                
+                for (let i = 0; i <powerlist.length; i++){
+                    let finPowers = [];
+                    if (checkboxgroup[i].checked == true){
+                        finPowers.push(checkboxgroup[i].value); //learned this from c++ this is my code
+                    } 
+                } 
+            }
+       }
+
+       //might need to make a function with this code
+       const fName = urlParams.get('canText');
+       //I might make a function that uses a loop to add lines and check them all. Then itll store only the checked oned in an array.
+
+        //This is not my code, it's modified, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
+        function CheckBoxLimits() { //declares function
+            let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
+            let limit = 3; // declares a limit of 3
+            for (let i = 0; i < checkboxgroup.length; i++) { //i is 0, if i is less than the amount of checkboxes, run the code, add 1 to i.
+                checkboxgroup[i].onclick = function() { //nests a function within this function whenever a checkbox is clicked
+                    let checkcount = 0; //new counter variable
+                        for (let i = 0; i < checkboxgroup.length; i++) { 
+                        checkcount += (checkboxgroup[i].checked) ? 1 : 0; // this one im still a little unsure on, but generally it increases the counter the more checkboxes are checked
+                    }
+                    if (checkcount > limit) { // if counter is greater than the limit, run the code
+                        alert("You can select maximum of " + limit + " checkbox."); //pops up a web alert saying you can't check more
+                        this.checked = false; // sets newest checked box to false
+                    }
+                }
+            }
+        }
+    
+        let SuperName = document.forms["contactForm"].HeroName.value; 
+        let colors; //Radio Buttons
+
+        let ideals; //Dropdown Menu
+
+        let existingHeroes = [
+        "Superman", "Batman", "The Flash", "Wonder Woman", "Green Lantern", 
+        "Aquaman", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Spider-Man",
+        "Scarlet Witch", "Wolverine", "Ant Man", "Doctor Strange", "Mystique", "Deadpool", 
+        ];
+
+        function whatIsYourSuperHero() { //cascading if else statements to determine
+            document.write("Your Superhero Name is: " + SuperName + "!<br>");
+        }
+
+        whatIsYourSuperHero(SuperName);
+    </script>
+    
+</body>
+</html>
