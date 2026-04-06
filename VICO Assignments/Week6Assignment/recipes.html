@@ -1,60 +1,13 @@
 <!DOCTYPE html>
-<!-- Create an HTML page with CSS styling and JavaScript code to do the following:
-
-Create an array of some kind of list with at least five elements in any order. (10 XP)
- 
-Display this list somewhere on the page (10 XP), sorted alphabetically (10 XP), using one of the four loop types taught in class (10 XP).
- 
-Create an array of images of your choice. (This would be an array of the paths to the images, either in your project or URLs of images online.) (10 XP)
- 
-Display these images (10 XP) with a size 200 px wide or less, using one of the four loop types taught in class (10 XP).
- 
-Create a multidimensional array of links for a website that includes the text and the URL/path for each element (20 XP).
- 
-Display this a "menu" on your page (20 XP) using one of the four loop types taught in class (10 XP).
- 
-(Bonus 10 XP) Make the thumbnails in your thumbnail gallery open to its corresponding larger image.
- 
-For the rest of the points:
-
-Include some CSS styling (5 XP)
- 
-Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)
- 
-* Do not use a looping method that was not covered in class. If you do, you will not get points for the loop.-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <style>
-        img {
-            border-radius: 10px;
-            margin: 10px;
-        }
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 10px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        #grid-container {
-            display: grid;
-            grid-template-columns: 150px 200px 200px;
-        }
-
-    </style>
-
-    <script type="application/javascript">
+   <script type="application/javascript">
         let navArray = [
             [ "Caleb's Spicy Chicken", "index.html"],
             [ "Recipes", "recipes.html"],
@@ -66,60 +19,39 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
         }
     </script>
 
-    <div id = "grid-container">
-        <div class = "block-1" id = "block">
-            <h4>Caleb's Spicy Chicken</h4><img src = 'Images/chicken.jpg' width='200px'><br>
-        </div>
-        <div class = "block-2" id = "block">
-            <h4>Spicy Pita, Hummus, and Chicken</h4><img src = 'Images/chicken2.jpg' width='200px'><br>
-        </div>
-        <div class = "block-3" id = "block">
-            <h4>Spicy Chicken Veggie Bowl</h4><img src = 'Images/chicken3.jpg' width='200px'><br>
-        </div>
-        <div class = "block-4" id = "block">
-            <h4>Spicy Chicken Salad</h4><img src = 'Images/chicken4.jpg' width='200px'><br>
-        </div>
-    </div>
+    <div id = "grid-container"></div>
        
-    <script>
-        /* Hello! If you're reading this, you may be able to see what I was trying to do. 
-        I was trying to make a loop using html and javascript so i could also use css
-        Very confusing and couldn't figure it out at all.
-        For future uses, could you teach me how to do that?
-
-        Here's what I tried:
-
+    <script>   
+       let chickenFoods = document.getElementById("grid-container");
         
-       let chickenFoods = document.getElementById("block");
-        
-       chickenFoods = [ 
+       chixCards = [ 
         ["chicken.jpg","Caleb's Spicy Chicken"],
         ["chicken2.jpg", "Spicy Pita, Hummus, and Chicken"],
         ["chicken3.jpg", "Spicy Chicken Veggie Bowl"],
         ["chicken4.jpg", "Spicy Chicken Salad"]
        ];
 
-        for (let x in chickenFoods) {
-            document.write("<h4>" + chickenFoods[x][1] + "</h4>" + "<img src='Images/" + chickenFoods[x][0] + "' width='200px'><br>");
-       } THIS WORKS I JUST SCRAPPED IT because i didn't know how to use css with it!
-
-       for (let x in chickenFoods){
-        chickenFoods.innerHtml += "<li><h4>Spicy Pita, Hummus, and Chicken</h4><img src = 'Images/chicken2.jpg' width='200px'><br></li>";
-        chickenFoods.innerHtml += "<li><h4>Spicy Chicken Veggie Bowl</h4><img src = 'Images/chicken3.jpg' width='200px'><br></li>";
-        chickenFoods.innerHtml += "<li><h4>Spicy Chicken Salad</h4><img src = 'Images/chicken4.jpg' width='200px'><br></li>";
-       } */
+       for (let y in chixCards){
+        chickenFoods.innerHTML += `
+        <div class = "block-${y+1}" id = "block">
+        <h4>${chixCards[y][1]}</h4>
+        <img src = 'Images/${chixCards[y][0]}' width='200px'><br>
+        </div>
+        `;
+       } 
     </script>
 
-
-    <p>Visit my <a href = index.html>Caleb's Spicy Chicken</a> page to learn how I make the chicken!</p>
-
         <div class = "footer">
-            <ul>
-                <li><a href="index.html">Caleb's Spicy Chicken</a></li>
-                <li><a href="recipes.html">Recipes</a></li>
-                <li><a href="conclusion.html">Conclusion</a></li>
-            </ul>
+            <h5>Visit my <a href = index.html>Caleb's Spicy Chicken</a> page to learn how I make the chicken!</h5>
+
+            <div id = "nav-container">
+                <a href="index.html">Caleb's Spicy Chicken</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="conclusion.html">Conclusion</a>
+            </div>
+
             <p>Copyright 2026 Caleb Strong</p>
+
         </div>
 </body>
 
