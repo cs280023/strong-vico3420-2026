@@ -30,7 +30,6 @@ h2 {
     float: left;
     margin-right: 50px;
 }
-
 .item, .total {
     margin-bottom: 5px;
     font-size: 1.4rem;
@@ -40,4 +39,3 @@ h2 {
     color: gray;
     font-size: 0.8rem;
 }
-
