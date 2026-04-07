@@ -9,31 +9,48 @@
    
     <style>
     </style>
+
+    <form id="contactForm" action="" method="get">
+        <div id="HeroNameText">
+            <label for="HeroName"><h4>What's your Superhero Name? </h4></label>
+        </div><br>
+
+        <div id="powersCheck">
+            <label><h4>Pick up to 3 Super Powers: </h4></label>
+        </div><br>
+
+        <div id="colorForm">
+            <label><h4>Favorite Color: </h4></label>
+        </div><br>
     
-    <div id="HeroNameText">
-        <label for="HeroName"><h4>What's your Superhero Name? </h4></label>
-    </div><br>
+        <div id="idealDropDown">
+            <label for="Ideals"><h4>Choose your Hero Ideal: </h4></label>
+            <select id="Ideals" name="Ideals"></select>
+        </div><br>
 
-    <div id="powersCheck">
-        <label><h4>Pick up to 3 Super Powers: </h4></label>
-    </div><br>
+        <button type="submit" value="submit" id="submitButton" onclick = "quizResults()">Submit</button><br>
 
-    <div id="colorForm">
-	    <label><h4>Favorite Color: </h4></label>
-	</div><br>
- 
-    <div id="idealDropDown">
-        <label for="Ideals"><h4>Choose your Hero Ideal: </h4></label>
-        <select id="Ideals" name="Ideals" onclick = "SubmitInfo()"></select>
-    </div><br>
-
-    <button type="submit" value="submit" id="submitButton" onclick = "SubmitInfo()">Submit</button><br>
-
-    <div id = "result">
-        <label><h4>Here are your Superhero Quiz Results: </h4></label>    
-    </div>
+        <div id="result">
+            <label><h4>Here are your Superhero Quiz Results: </h4></label>    
+        </div>
+        <div id="test">
+        </div>
+    </form>
 
     <script type="application/javascript">
+
+        let test = document.getElementById("test");
+        function quizResults(){
+            test.innerHTML = "";
+            test.innerHTML += "Quiz results will be displayed here.";
+            whatIsYourSuperHero(HeroName.value);
+            CheckBoxResults();
+        }
+
+        function whatIsYourSuperHero(x) { //cascading if else statements to determine within a function
+            console.log(x);
+            document.getElementById("result").innerHTML = "Your Superhero Name is: " + x + "!<br>";
+        }
   /* Create an HTML page with CSS styling and JavaScript code to do the following:
 
 Create a custom function with no parameters (10 XP) and call it at least once (10 XP).
@@ -57,7 +74,7 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
 
         //HERO NAME SECTION
         let SuperName = document.getElementById("HeroNameText"); //textform
-        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" onclick = "SubmitInfo()" placeholder = "Superhero Name Here...">`;
+        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">`;
 
         //POWERS SECTION
         let powers = document.getElementById("powersCheck"); //Checkboxes
@@ -67,7 +84,7 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
         for (let y in powerList){
             powers.innerHTML += 
                 `<label for="powerList">${powerList[y]}</label>
-                <input type = "checkbox" id = "powerList" name = "power[${y}]" value = "${powerList[y]}" onclick = "SubmitInfo()">
+                <input type = "checkbox" id = "powerList" class = "power" name = "power[${y}]" value = "${powerList[y]}" onclick = "SubmitInfo()">
                 <br>`;
                 CheckBoxLimits();
         }
@@ -89,47 +106,62 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
                 `<option value="${idealList[z]}">${idealList[z]}</option>`;
         }//fix why its opening upward with css 
         
-       /*Trying to concatenate the powers into a string by checking if each box is checked, 
-       and adding the checked boxes into a string that's stored in a variable.
+    
+       /*Trying to add the powers into an array by checking if each box is checked, 
+       and adding the checked boxes values into said array
        instead, gonna make a function where all data is stored in diff variables upon submitting. */
 
-        function SubmitInfo() {
-            let submitButton = document.getElementById("submitButton");
-            let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input");
-            let colorchoice = document.getElementById('colorform').getElementsByTagName("input");
-            
+       
+           /* const URLGET = window.location.search; 
+            if (URLGET != "") {
+                const getResults = new URLSearchParams(URLGET); 
+                console.log(getResults);  //not sure the purpose of this, going off the example
+               
+                const checkPowers = CheckBoxResults("powers"); 
+                document.getElementById("result").innerHTML += `<p>Your powers are: ${checkPowers}</p><br>`;    
+            }*/
+
             //have to make a function specifically for checkboxes
             //Might need to put this in an area or an object?
-            const POWERLI = CheckBoxResults();
-            const COLORCHOICE = urlParams.get('color');
-            const IDEALCHOICE = urlParams.get('Ideals');
-            const HERONAME = urlParams.get('HeroName');
+           
+            document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
 
-            submitButton.onclick = function(){
-                let results = document.getElementById("result");
-                results.innerHTML += `<p>Here are your Powers: ${POWERLI}</p>`;
-                results.innerHTML += `<p>Hero Name: ${HERONAME}</p>`;
-                results.innerHTML += `<p>Color Choice: ${COLORCHOICE}</p>`;
-                results.innerHTML += `<p>Ideal Choice: ${IDEALCHOICE}</p>`;
+            function tempSubmit(){
+                document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
             }
+ 
 
-            return results;
-       } 
+       //!!!!Make sure to attend office hours later!!!
+       //no idea why this doesnt work
+        let array = [];
+        let checkboxes = document.querySelectorAll('input[type=checkbox]:checked'); //not my code
 
+        for (let i = 0; i < checkboxes.length; i++) {
+            array.push(checkboxes[i].value)
+        }
+
+        let result = document.getElementById("result");  
+        result.innerHTML += `<p>Your powers are: ${array}</p><br>`;
+        
        //next function here for checkboxes
-       function CheckBoxResults(finPowers) {
-        for (let i = 0; i <powerlist.length; i++){
-                    let finPowers = [];
-                    if (checkboxgroup[i].checked == true){
-                        finPowers.push(urlParams.get('power[' + i + ']')); //learned this from c++ this is my code
-                    } 
-                } 
-
-        return finPowers;
+   
+       function CheckBoxResults() {
+        let finPowers = [];
+        let checkboxgroup;
+        for (let i = 0; i <powerList.length; i++){
+            //checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
+             checkboxgroup = document.getElementsByClassName("power"); 
+            //method 1
+            if (checkboxgroup[i].checked == true){
+                finPowers.push(checkboxgroup[i].value); 
+            }            
+        } 
+        document.getElementById("result").innerHTML += "<p>Your Powers are: " + finPowers + "</p><br>"; //Consider making a for loop to properly display the array
+        //document.write(finPowers);
        }
-       const CHECKBOXES = urlParams.get('canText');
-       //I might make a function that uses a loop to add lines and check them all. Then itll store only the checked oned in an array.
+    
 
+      
         //This is not my code, it's modified, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
         function CheckBoxLimits() { //declares function
             let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
@@ -154,11 +186,7 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
         "Scarlet Witch", "Wolverine", "Ant Man", "Doctor Strange", "Mystique", "Deadpool", 
         ];
 
-        function whatIsYourSuperHero() { //cascading if else statements to determine within a function
-            document.write("Your Superhero Name is: " + SuperName + "!<br>");
-        }
-
-        whatIsYourSuperHero(SuperName);
+        whatIsYourSuperHero(HeroName.value);
     </script>
     
 </body>
