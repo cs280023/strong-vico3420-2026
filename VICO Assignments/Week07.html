@@ -30,138 +30,95 @@
 
         <button type="submit" value="submit" id="submitButton" onclick = "quizResults()">Submit</button><br>
 
-        <div id="result">
-            <label><h4>Here are your Superhero Quiz Results: </h4></label>    
+        <div id="chSheet">
         </div>
-        <div id="test">
-        </div>
+    
     </form>
 
     <script type="application/javascript">
 
-        let test = document.getElementById("test");
+        /* Create an HTML page with CSS styling and JavaScript code to do the following:
+    Create a custom function with no parameters (10 XP) and call it at least once (10 XP).
+    Create a custom function with one parameter (15 XP) and call it at least once (15 XP).
+    Create a custom function with at least two parameters (20 XP) and call it at least once (20 XP). 
+    Have at least one of the custom functions return information. (5 XP)
+    
+    (Bonus 5 XP) Have a function run on an interaction with a click, scroll, hover, etc.
+    
+    For the rest of the points
+    Include some CSS styling (5 XP)
+    Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)*/
+
+        document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
+
+        let chSheet = document.getElementById("chSheet");
+
+        //RESULTS FUNCTION
         function quizResults(){
-            test.innerHTML = "";
-            test.innerHTML += "Quiz results will be displayed here.";
+            chSheet.innerHTML = "";
+            chSheet.innerHTML += "<label><h4>Here are your Superhero Quiz Answers: </h4></label>";
             whatIsYourSuperHero(HeroName.value);
             CheckBoxResults();
+            colorChoice();
+            idealText(idealList);
         }
 
-        function whatIsYourSuperHero(x) { //cascading if else statements to determine within a function
-            console.log(x);
-            document.getElementById("result").innerHTML = "Your Superhero Name is: " + x + "!<br>";
+        //HERO NAME FUNCTION
+        function whatIsYourSuperHero(x) { 
+            chSheet.innerHTML = "<p>Your Superhero Name is: " + x + "<br></p>";
         }
-  /* Create an HTML page with CSS styling and JavaScript code to do the following:
-
-Create a custom function with no parameters (10 XP) and call it at least once (10 XP).
- 
-Create a custom function with one parameter (15 XP) and call it at least once (15 XP).
- 
-Create a custom function with at least two parameters (20 XP) and call it at least once (20 XP). 
- 
-Have at least one of the custom functions return information. (5 XP)
- 
-(Bonus 5 XP) Have a function run on an interaction with a click, scroll, hover, etc.
- 
-For the rest of the points:
-
-Include some CSS styling (5 XP)
- 
-Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)*/
- 
-
-        //gonna make a superhero quiz!
-
-        //HERO NAME SECTION
-        let SuperName = document.getElementById("HeroNameText"); //textform
-        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">`;
-
-        //POWERS SECTION
-        let powers = document.getElementById("powersCheck"); //Checkboxes
-        let powerList = [ "Flight", "Super Strength", "Invisibility", "Telepathy", "Super Speed", "Telekinesis", 
-            "Shape Shifting", "Time Manipulation", "Energy Projection", "Healing Factor", "Super Intelligence", 
-            "Elemental Control", "Size Manipulation", "Force Fields", "Laser Vision", "Immortality" ];
-        for (let y in powerList){
-            powers.innerHTML += 
-                `<label for="powerList">${powerList[y]}</label>
-                <input type = "checkbox" id = "powerList" class = "power" name = "power[${y}]" value = "${powerList[y]}" onclick = "SubmitInfo()">
-                <br>`;
-                CheckBoxLimits();
+  
+        //POWERS FUNCTION
+        function CheckBoxResults() {
+            let x = [];
+            let checkboxgroup;
+            for (let i = 0; i < powerList.length; i++){
+                checkboxgroup = document.getElementsByClassName("power"); 
+                if (checkboxgroup[i].checked == true){
+                    x.push(checkboxgroup[i].value); 
+                }            
+            } 
+            chSheet.innerHTML += "<p>Your Powers are: " + x + "</p>"; 
         }
-
-        //COLORS SECTION
-        let colorform = document.getElementById("colorForm"); //Radio Buttons
-        let colors = ["Red", "Orange", "Yellow", "Blue", "Green", "Purple", "Pink", "Black", "White"];
-        for (let x in colors){
-            colorform.innerHTML += 
-                `<input type="radio" id="${colors[x]}" name="color" value="${colors[x]} onclick = "SubmitInfo()">
-                <label for="${colors[x]}">${colors[x]}</label><br>`;
-        }
-
-        //IDEALS SECTION
-        let ideals = document.getElementById('idealDropDown').getElementsByTagName("select")[0]; //Dropdown Menu
-        let idealList = ["Justice", "Freedom", "Power", "Knowledge", "Peace", "Love", "Revenge", "Family", "Rage", "Money"];
-        for (let z in idealList){
-            ideals.innerHTML += 
-                `<option value="${idealList[z]}">${idealList[z]}</option>`;
-        }//fix why its opening upward with css 
         
-    
-       /*Trying to add the powers into an array by checking if each box is checked, 
-       and adding the checked boxes values into said array
-       instead, gonna make a function where all data is stored in diff variables upon submitting. */
-
-       
-           /* const URLGET = window.location.search; 
-            if (URLGET != "") {
-                const getResults = new URLSearchParams(URLGET); 
-                console.log(getResults);  //not sure the purpose of this, going off the example
-               
-                const checkPowers = CheckBoxResults("powers"); 
-                document.getElementById("result").innerHTML += `<p>Your powers are: ${checkPowers}</p><br>`;    
-            }*/
-
-            //have to make a function specifically for checkboxes
-            //Might need to put this in an area or an object?
-           
-            document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
-
-            function tempSubmit(){
-                document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
+        //COLOR FUNCTION
+        function colorChoice() {
+            let color;
+            let x = "";
+            for (let i = 0; i < colors.length; i++){
+                color = document.getElementById("colorForm").getElementsByTagName("input");
+                if (color[i].checked == true){
+                    x = (color[i].value);
+                }
             }
- 
-
-       //!!!!Make sure to attend office hours later!!!
-       //no idea why this doesnt work
-        let array = [];
-        let checkboxes = document.querySelectorAll('input[type=checkbox]:checked'); //not my code
-
-        for (let i = 0; i < checkboxes.length; i++) {
-            array.push(checkboxes[i].value)
+            chSheet.innerHTML += "<p>Your Favorite Color is: " + x + "</p>";
         }
 
-        let result = document.getElementById("result");  
-        result.innerHTML += `<p>Your powers are: ${array}</p><br>`;
-        
-       //next function here for checkboxes
-   
-       function CheckBoxResults() {
-        let finPowers = [];
-        let checkboxgroup;
-        for (let i = 0; i <powerList.length; i++){
-            //checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
-             checkboxgroup = document.getElementsByClassName("power"); 
-            //method 1
-            if (checkboxgroup[i].checked == true){
-                finPowers.push(checkboxgroup[i].value); 
-            }            
-        } 
-        document.getElementById("result").innerHTML += "<p>Your Powers are: " + finPowers + "</p><br>"; //Consider making a for loop to properly display the array
-        //document.write(finPowers);
-       }
-    
+        //IDEALS FUNCTION
+        function idealText(x){
+            let v = "";
+            let v1 = "";
+            let w = "";
+            let w1 = "";
+            for (let i = 0; i < x.length; i++){
+                z = document.getElementById("idealDropDown").getElementsByTagName("option");
+                if (z.selected == true){
+                    v = z.value[i][0];
+                    w = z.value[i][1];
+                    v1 = z.options[z.selectedIndex].text;
+                    w2 = z.options[z.selectedIndex].value;
+                }
+            }
+            chSheet.innerHTML += "<p> Your Ideal is: " + v + "</p>";
+            chSheet.innerHTML += w + v1 + w2;
+        }
 
-      
+        /*
+        var e = document.getElementById("ddlViewBy");
+        var value = e.value;
+        var text = e.options[e.selectedIndex].text;
+        */
+
         //This is not my code, it's modified, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
         function CheckBoxLimits() { //declares function
             let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
@@ -180,13 +137,57 @@ Make sure the file name(s) have no spaces and the submitted file(s) have the cor
             }
         } 
 
+        //HERO NAME SECTION
+        let SuperName = document.getElementById("HeroNameText"); //textform
+        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">`;
+
+        //POWERS SECTION
+        let powers = document.getElementById("powersCheck"); //Checkboxes
+        let powerList = [ " Flight", " Super Strength", " Invisibility", " Telepathy", " Super Speed", " Telekinesis", 
+            " Shape Shifting", " Time Manipulation", " Energy Projection", " Healing Factor", " Super Intelligence", 
+            " Elemental Control", " Size Manipulation", " Force Fields", " Laser Vision", " Immortality" ];
+        for (let y in powerList){
+            powers.innerHTML += 
+                `<label for="powerList">${powerList[y]}</label>
+                <input type = "checkbox" id = "powerList" class = "power" name = "power[${y}]" value = "${powerList[y]}">
+                <br>`;
+                CheckBoxLimits();
+        }
+
+        //COLORS SECTION
+        let colorform = document.getElementById("colorForm"); //Radio Buttons
+        let colors = ["Red", "Orange", "Yellow", "Blue", "Green", "Purple", "Pink", "Black", "White"];
+        for (let x in colors){
+            colorform.innerHTML += 
+                `<input type="radio" id="${colors[x]}" name="color" value="${colors[x]}">
+                <label for="${colors[x]}">${colors[x]}</label><br>`;
+        }
+
+        //IDEALS SECTION
+        let ideals = document.getElementById('idealDropDown').getElementsByTagName("select")[0]; //Dropdown Menu
+        let idealList = [
+            ["Justice", "You wish to protect the innocent because it is right"], 
+            ["Freedom", "You value autonomy and liberation, protecting that right for yourself and others"],
+            ["Power", "Your only goal is to be stronger, stronger than anyone else"],
+            ["Knowledge", "You seek to understand the mysteries of the universe"],
+            ["Peace", "You desire no more violence, just tranquility, but you will do what you must to achieve it"], 
+            ["Love", "You do the actions you do because you know someone you care for deeply that you want to protect"], 
+            ["Revenge", "You lost someone or something close to you, and you seek to avenge that loss"], 
+            ["Rage", "You are consumed by anger, and there is minimal thought to anything else"], 
+            ["Money", "You do what you must all for financial gain, because what is happiness without money"]
+        ];
+        for (let x = 0; x < idealList.length; x++){
+            ideals.innerHTML += 
+                `<option value="${idealList[x][0]}">${idealList[x][0]}</option>`;
+        }
+       
+
         let existingHeroes = [ 
         "Superman", "Batman", "The Flash", "Wonder Woman", "Green Lantern", 
         "Aquaman", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Spider-Man",
         "Scarlet Witch", "Wolverine", "Ant Man", "Doctor Strange", "Mystique", "Deadpool", 
         ];
 
-        whatIsYourSuperHero(HeroName.value);
     </script>
     
 </body>
