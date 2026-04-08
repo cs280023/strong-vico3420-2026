@@ -94,32 +94,29 @@
             chSheet.innerHTML += "<p>Your Favorite Color is: " + x + "</p>";
         }
 
-        //IDEALS FUNCTION
+        //IDEALS FUNCTION doesnt work will email her about it later
         function idealText(x){
             let v = "";
-            let v1 = "";
             let w = "";
-            let w1 = "";
+            let z;
             for (let i = 0; i < x.length; i++){
-                z = document.getElementById("idealDropDown").getElementsByTagName("option");
-                if (z.selected == true){
+               z = document.getElementById("idealDropDown").getElementsByTagName("input");
+                if (z.selected== true){
                     v = z.value[i][0];
                     w = z.value[i][1];
-                    v1 = z.options[z.selectedIndex].text;
-                    w2 = z.options[z.selectedIndex].value;
                 }
             }
             chSheet.innerHTML += "<p> Your Ideal is: " + v + "</p>";
-            chSheet.innerHTML += w + v1 + w2;
+            chSheet.innerHTML += w;
         }
 
-        /*
+        /* code online i found that claims to work but, how ive used it at least, it does not.
         var e = document.getElementById("ddlViewBy");
         var value = e.value;
         var text = e.options[e.selectedIndex].text;
         */
 
-        //This is not my code, it's modified, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
+        //This is not my code, it was found on line but modified by me, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
         function CheckBoxLimits() { //declares function
             let checkboxgroup = document.getElementById('powersCheck').getElementsByTagName("input"); //sets checkboxgroup as the variable for the html checkbox form
             let limit = 3; // declares a limit of 3
@@ -180,7 +177,6 @@
             ideals.innerHTML += 
                 `<option value="${idealList[x][0]}">${idealList[x][0]}</option>`;
         }
-       
 
         let existingHeroes = [ 
         "Superman", "Batman", "The Flash", "Wonder Woman", "Green Lantern", 
