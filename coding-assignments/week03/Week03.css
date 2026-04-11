@@ -1,0 +1,53 @@
+body {
+    font-family: Helvetica, sans-serif;
+    color: black;
+}
+
+h5 {
+    color: red;
+}
+
+h1{
+    color:  black;
+    font-size: 3em;
+}
+footer {
+    padding: 30px;
+    border:5px;
+    border-color: black;
+}
+.intro {
+    color:aqua;
+}
+
+.desc {
+    color:blue;
+}
+
+#mini {
+    color:green;
+    font-size: 0.75em;
+}
+
+#caption {
+    color:saddlebrown;
+}
+
+a {
+    color:rosybrown;
+}
+@media screen and (max-width: 500px) {
+    body{
+        padding: 15px;
+    }
+    .intro {
+        color: yellow;
+        font-size: 1.5em;
+        padding: 10px;
+        margin: 15px;
+    }
+    #mini {
+        font-size: .5em;
+        color:crimson;
+    }
+}

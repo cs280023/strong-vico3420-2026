@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 04 Assignment</title>
+</head>
+<body>
+    
+    <script type="application/javascript">
+
+        //defining all variables
+        let week3 = "please ";
+        const BROKEN = "help me"
+        const EXPLANATION = "I promise I did the assignment. I accidentally merged and broke it. Is there anyway to undo an accidental merge?"
+        let num1 = 1;
+        let num2 = 7;
+        let answer;
+
+        //displaying variables
+        document.write(`week3 is: ${week3}`);
+        document.write("<br>");
+        document.write(`broken is: ${BROKEN}`);
+        document.write("<br>");
+        document.write(`EXPLANATION is: ${EXPLANATION}`);
+        document.write("<br>");
+
+        //adding variables and including css stylizing
+        document.write("<div style= 'color: red;'><em> " + week3 + BROKEN + "</em></div>");
+        
+        //updating variables
+        num1 ++;
+        num2 -= 6;
+        week3 = "will you " + week3 + BROKEN + "?";
+
+        //math operation and displaying updated variables + bonus if,then prompt statement
+        answer = prompt(("Regarding Week " + (Number(num1 + num2)) + ", " + (week3) + " Please answer with 'y' for yes, or 'n' for no: "));
+        document.write("<br>");
+        document.write("Below is the answer your input gave: ")
+        document.write("<br>");
+        if (answer == "y") {
+            document.write("Thank you! With your help, my grade will thrive and I'll do even more fun code like this! Isn't it so fun?")
+        }
+        else if (answer  == "n") {
+            document.write ("I apologize for taking this assignment so lightly. I will learn how to help myself. Thank you for your time.")
+        }
+        else {
+            document.write(" Ah I see, you're testing the code aren't you. This is a little fun to you ay? Well, this code doesn't accept that input, so ERROR")
+        }
+
+    </script>
+</body>
+</html>
