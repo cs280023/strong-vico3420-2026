@@ -8,11 +8,27 @@
 <body>
    
     <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+            text-align: center;
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+        
+        #chSheet {
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 50%;
+            padding: 20px;
+        }
     </style>
 
+    <h1> Superhero Creator</h1>
+    <p> Welcome to my Super Creator! Here, you'll pick various attributes to create a unique superhero (or villain!)</p>
+
     <form id="contactForm" action="" method="get">
-        <div id="HeroNameText">
-            <label for="HeroName"><h4>What's your Superhero Name? </h4></label>
+        <div id="heroNameText">
+            <label for="heroName"><h4>What's your Super Name? </h4></label>
         </div><br>
 
         <div id="powersCheck">
@@ -24,58 +40,92 @@
         </div><br>
     
         <div id="idealDropDown">
-            <label for="Ideals"><h4>Choose your Hero Ideal: </h4></label>
-            <select id="Ideals" name="Ideals"></select>
+            <label for="ideals"><h4>Choose your Ideal: </h4></label>
+            <select id="ideals" name="ideals"></select>
         </div><br>
 
-        <button type="submit" value="submit" id="submitButton" onclick = "quizResults()">Submit</button><br>
+        <div id="alignmentForm">
+            <label><h4>Choose your Alignment: </h4></label>
+        </div><br>
 
-        <div id="chSheet">
+        <button type="submit" value="submit" id="submitButton" onclick = "characterSheet()">Submit</button><br>
+
+        <div id="chSheet"></div>
+        <div id = "footer">
+            <p>Website Created by Caleb Strong</p>
+            <p>All rights reserved</p>
         </div>
-    
+        
     </form>
 
     <script type="application/javascript">
-
-        /* Create an HTML page with CSS styling and JavaScript code to do the following:
-    Create a custom function with no parameters (10 XP) and call it at least once (10 XP).
-    Create a custom function with one parameter (15 XP) and call it at least once (15 XP).
-    Create a custom function with at least two parameters (20 XP) and call it at least once (20 XP). 
-    Have at least one of the custom functions return information. (5 XP)
-    
-    (Bonus 5 XP) Have a function run on an interaction with a click, scroll, hover, etc.
-    
-    For the rest of the points
-    Include some CSS styling (5 XP)
-    Make sure the file name(s) have no spaces and the submitted file(s) have the correct extension (.html for HTML, .css for CSS, and .js for JavaScript). (5 XP)*/
 
         document.getElementById("submitButton").addEventListener("click", function(event){event.preventDefault()});
 
         let chSheet = document.getElementById("chSheet");
 
         //RESULTS FUNCTION
-        function quizResults(){
+        function characterSheet(){
             chSheet.innerHTML = "";
-            chSheet.innerHTML += "<label><h4>Here are your Superhero Quiz Answers: </h4></label>";
-            whatIsYourSuperHero(HeroName.value);
-            CheckBoxResults();
-            colorChoice();
-            idealText(idealList);
-        }
 
+            if (colorChoice() == "" || alignmentChoice() == "" || heroName.value == ""){
+            document.getElementById("chSheet").style.backgroundColor = "white";
+            document.getElementById("chSheet").style.color = "black";
+            chSheet.innerHTML += "<p>Please finish filling out the full form</p>";
+            }
+
+            else{
+                chSheet.innerHTML += "<h4>Here is your Super Creation!</h4>";
+                whatIsYourSuperHero(heroName.value);
+                checkBoxResults();
+                chSheet.innerHTML += "<p>Your Favorite Color is: " + colorChoice() + "</p>";
+                chSheet.innerHTML += "<p>You are a: " + alignmentChoice() + "</p>";
+                idealText(idealList, idealCall);
+                chSheet.innerHTML += "<h3>Thank you for using the Super Creator!</h3>";
+
+
+                document.getElementById("chSheet").style.backgroundColor = colorChoice();
+
+                if (colorChoice() == "Black"){
+                    document.body.style.backgroundColor = "white";
+                    document.body.style.color = "black";
+                }
+                else {
+                    document.body.style.backgroundColor = "black";
+                    document.body.style.color = "white";
+                }
+
+                switch (colorChoice()) {
+                    case "Red":
+                        document.getElementById("chSheet").style.color = "white";
+                        break;
+                    case "Blue":
+                        document.getElementById("chSheet").style.color = "white";
+                        break;
+                    case "Black":
+                        document.getElementById("chSheet").style.color = "white";
+                        break;
+                    case "Purple":
+                        document.getElementById("chSheet").style.color = "white";
+                        break;
+                    default:
+                        document.getElementById("chSheet").style.color = "black";
+                }
+            }
+        }
         //HERO NAME FUNCTION
         function whatIsYourSuperHero(x) { 
-            chSheet.innerHTML = "<p>Your Superhero Name is: " + x + "<br></p>";
+            chSheet.innerHTML += "<p>Your Super Name is: " + x + "<br></p>";
         }
   
         //POWERS FUNCTION
-        function CheckBoxResults() {
+        function checkBoxResults() {
             let x = [];
-            let checkboxgroup;
+            let checkBoxGroup;
             for (let i = 0; i < powerList.length; i++){
-                checkboxgroup = document.getElementsByClassName("power"); 
-                if (checkboxgroup[i].checked == true){
-                    x.push(checkboxgroup[i].value); 
+                checkBoxGroup = document.getElementsByClassName("power"); 
+                if (checkBoxGroup[i].checked == true){
+                    x.push(checkBoxGroup[i].value); 
                 }            
             } 
             chSheet.innerHTML += "<p>Your Powers are: " + x + "</p>"; 
@@ -91,30 +141,35 @@
                     x = (color[i].value);
                 }
             }
-            chSheet.innerHTML += "<p>Your Favorite Color is: " + x + "</p>";
+           return x;
         }
 
-        //IDEALS FUNCTION doesnt work will email her about it later
-        function idealText(x){
-            let v = "";
-            let w = "";
-            let z;
-            for (let i = 0; i < x.length; i++){
-               z = document.getElementById("idealDropDown").getElementsByTagName("input");
-                if (z.selected== true){
-                    v = z.value[i][0];
-                    w = z.value[i][1];
+         //ALIGNMENT FUNCTION
+        function alignmentChoice() {
+            let alignment;
+            let x = "";
+            for (let i = 0; i < alignLi.length; i++){
+                alignment = document.getElementById("alignmentForm").getElementsByTagName("input");
+                if (alignment[i].checked == true){
+                    x = (alignment[i].value);
                 }
             }
-            chSheet.innerHTML += "<p> Your Ideal is: " + v + "</p>";
-            chSheet.innerHTML += w;
+            return x;
         }
 
-        /* code online i found that claims to work but, how ive used it at least, it does not.
-        var e = document.getElementById("ddlViewBy");
-        var value = e.value;
-        var text = e.options[e.selectedIndex].text;
-        */
+        //IDEALS FUNCTION 
+        function idealText(x,z){
+            let v = "";
+            let w = "";
+            for (let i = 0; i < x.length; i++){
+                if (z[i].selected== true){
+                    v = z.value;
+                    w = x[i][1];
+                    chSheet.innerHTML += "<p> Your Ideal is: " + v + "</p>";
+                    chSheet.innerHTML += "<p>" + w + "</p>";
+                }
+            }    
+        }
 
         //This is not my code, it was found on line but modified by me, so don't count it as mine for grading purposes. However, I will comment to show my understanding.
         function CheckBoxLimits() { //declares function
@@ -135,8 +190,8 @@
         } 
 
         //HERO NAME SECTION
-        let SuperName = document.getElementById("HeroNameText"); //textform
-        SuperName.innerHTML += `<input type="text" id="HeroName" name="HeroName" placeholder = "Superhero Name Here...">`;
+        let SuperName = document.getElementById("heroNameText"); //textform
+        SuperName.innerHTML += `<input type="text" id="heroName" name="heroName" placeholder = "Super Name Here...">`;
 
         //POWERS SECTION
         let powers = document.getElementById("powersCheck"); //Checkboxes
@@ -161,28 +216,32 @@
         }
 
         //IDEALS SECTION
+        let idealCall = document.getElementById("ideals");
         let ideals = document.getElementById('idealDropDown').getElementsByTagName("select")[0]; //Dropdown Menu
         let idealList = [
-            ["Justice", "You wish to protect the innocent because it is right"], 
-            ["Freedom", "You value autonomy and liberation, protecting that right for yourself and others"],
-            ["Power", "Your only goal is to be stronger, stronger than anyone else"],
-            ["Knowledge", "You seek to understand the mysteries of the universe"],
-            ["Peace", "You desire no more violence, just tranquility, but you will do what you must to achieve it"], 
-            ["Love", "You do the actions you do because you know someone you care for deeply that you want to protect"], 
-            ["Revenge", "You lost someone or something close to you, and you seek to avenge that loss"], 
-            ["Rage", "You are consumed by anger, and there is minimal thought to anything else"], 
-            ["Money", "You do what you must all for financial gain, because what is happiness without money"]
+            ["Justice", "You wish to protect the innocent because it is right."],
+            ["Freedom", "You value autonomy and liberation, protecting that right for yourself and others."],
+            ["Power", "Your only goal is to be stronger, stronger than anyone else."],
+            ["Knowledge", "You seek to understand the mysteries of the universe."],
+            ["Peace", "You desire no more violence, just tranquility, but you will do what you must to achieve it."],
+            ["Love", "You do the actions you do because you know someone you care for deeply that you want to protect."],
+            ["Revenge", "You lost someone or something close to you, and you seek to avenge that loss."],
+            ["Rage", "You are consumed by anger, and there is minimal thought to anything else."],
+            ["Money", "You do what you must all for financial gain, because what is happiness without money."]
         ];
         for (let x = 0; x < idealList.length; x++){
-            ideals.innerHTML += 
+            ideals.innerHTML +=
                 `<option value="${idealList[x][0]}">${idealList[x][0]}</option>`;
         }
 
-        let existingHeroes = [ 
-        "Superman", "Batman", "The Flash", "Wonder Woman", "Green Lantern", 
-        "Aquaman", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Spider-Man",
-        "Scarlet Witch", "Wolverine", "Ant Man", "Doctor Strange", "Mystique", "Deadpool", 
-        ];
+        //ALIGNMENT SECTION
+        let alignment = document.getElementById("alignmentForm"); //Radio Buttons
+        let alignLi = ["Hero", "Villain", "Anti-Hero", "Vigilante", "Civilian"];
+        for (let x in alignLi){
+            alignment.innerHTML += 
+                `<input type="radio" id="${alignLi[x]}" name="alignment" value="${alignLi[x]}">
+                <label for="${alignLi[x]}">${alignLi[x]}</label><br>`;
+        }
 
     </script>
     
