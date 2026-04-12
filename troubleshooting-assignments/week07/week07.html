@@ -20,13 +20,13 @@
         </div>
         <div class="formField">
             <label for="goodDay">Check here if you're having a good day: </label>
-            <input type="checkbox" id="goodDay" name="goodDay" onchange="updateCard()">
+            <input type="checkbox" id="goodDay" name="goodDay" checked onchange="updateCard()" >
         </div>
-        <div class="formField">
+        <div class="formField" onclick = "updateCard()">
             <label>Choose a font style: </label><br>
-            <input type="radio" id="serif" name="fontType" value="serif" checked onclick="updateCard()" onkeyup="updateCard()"> 
+            <input type="radio" id="serif" name="fontType" value="serif" checked> 
             <label for="serif">Serif</label><br>
-            <input type="radio" id="sans" name="fontStyle" value="sans" onclick="updateCard()"> 
+            <input type="radio" id="sans" name="fontType" value="sans"> 
             <label for="sans">Sans Serif</label><br>
             <input type="radio" id="script" name="fontType" value="script"> 
             <label for="script">Script</label>
