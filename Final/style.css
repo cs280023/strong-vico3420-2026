@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&family=Six+Caps&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('Images/Gradient.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.text { /* For the Clipping mask*/
+  background: url('Images/MoriahPurple.png') center;
+  background-clip: text;
+  color: transparent;
+  
+/* Make a cutout PNG  */
+    font-size: 600px; /*SMALL is 600PX*/
+    font-family: "Six Caps", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    text-align: center;
+    width: 100%;
+    height: auto;
+
+    align-content: center; 
+    user-select: none;
+    white-space: nowrap;
+
+    display: inline-block !important;
+    overflow: visible !important;
+    overflow-x: visible !important; 
+}
+body:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+body .text{
+    background-attachment: fixed;
+    transform: font-size;
+    transition-duration: 0.5s;
+}
+.text:active {
+    font-size: 200px;
+}
+a {
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 15px;
+    color: white !important;
+&:hover {
+    transform: scale(1.1);
+    background: -webkit-linear-gradient(#7279B2, #ffffff);
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    }
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0px !important;
+    margin: 0px !important;
+    /* display: block; */
+    list-style-position: inside !important;
+    font-family: "CRONDE", helvetica;
+}
+ul li{
+    padding: 8px 0;
+    font-size: 25px;
+}
+h1 {
+    font-family: "CRONDE", helvetica;
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+.sidebar-nav {
+  position: absolute !important;
+  width: 10%;
+  text-align: center;
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 6em;
+  padding-top: 30px;
+  z-index: 9;
+  -webkit-overflow-scrolling: touch;
+  top: 0;
+  left: 0;
+}
+
+header {
+    z-index: 10;
+}
+#portfolio {
+    padding-top: 25px;
+    font-size: 250px;
+    padding-left: 250px !important;
+}
+#year {
+    font-size: 100px;
+    padding-top: 400px;
+    padding-left: 1500px !important;
+}
+/*LOOK THROUGH GLASS LIB TO FIND VARIABLE MEANINGS*/
+.glass {
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  background: rgba(126, 141, 247, 0.15) !important;
+  border: 0px !important;
+  box-shadow: 0 8px 8px rgba(255, 255, 255, 0.02) !important;
+  overflow: hidden;
+}
+#extraText li{
+    color:white;
+    font-size: 25px;
+    padding-top: 50px !important;
+}
+.infinite {
+    display:flex;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+.infinite h1 {
+    font-size: 130px;
+    white-space: nowrap;
+    padding: 5px;
+    letter-spacing: 1px;
+    color: white;
+    animation: move-rtl 6s linear infinite;
+}
+marquee {
+    color: white;
+    font-size: 75px;
+}
+@keyframes move-rtl {
+    0% {
+        transform: translateX(0);
+
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.container {
+    display:flex;
+    background: rgba(98, 97, 102, 0.15);
+    background-size: 200px 200px !important;
+    align-items: center;
+    position: relative !important;
+    width: 100%;
+}
+.container img {
+    padding-right: 50px;
+    height: 150%;
+    width: 150%;
+}
+.container .desc{
+    font-family: "Wix Madefor Text", sans-serif;
+    font-size: 20px;
+    font-weight: 400px;
+    font-style: normal;
+    color: white;
+}
+.socials {
+    margin-top: 50px;
+    padding-left: 500px;
+    font-size: 40px;
+    font-family: "Newsreader", serif;
+    font-optical-sizing: auto;
+    font-weight: 400px;
+    font-style: normal;
+}
+.socials a{
+    padding: 20px;
+}
+#pdf {
+    margin-left: 250px;
+    margin-top: 75px; 
+}
+.photoContainer {
+    margin-top: 50px;
+    display:flex;
+    align-items: center;
+    position: relative !important;
+    width: 100%;
+}
+.photoContainer #photoDesc{
+    font-family: "CRONDE", helvetica;
+    color: white;
+    padding: 40px;
+    font-size: 35px;
+}
+#title{
+    margin-left: 300px;
+    margin-top: 25px;
+    font-size: 100px !important;
+}
+#thanks{
+    font-size: 200px !important;
+    padding:15px;
+}
